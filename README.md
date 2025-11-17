@@ -6,7 +6,7 @@ It supports **user authentication**, **case management**, **document handling**,
 
 ---
 
-## ✨ Features
+##  Features
 
 ### **User Authentication**
 - User registration with email and password
@@ -95,40 +95,13 @@ backend/
 - **JWT (jsonwebtoken)** – Authentication
 - **bcryptjs** – Password hashing
 - **Google Gemini API** – AI verdict generation
-- **Cloudinary** – File storage (optional)
+- **Cloudinary** – File storage 
 - **CORS** – Cross-Origin Resource Sharing
 - **dotenv** – Environment management
 
 ---
 
-## 🔑 Environment Configuration (.env)
 
-Create a `.env` file in the `backend` directory:
-
-```env
-# Database
-MONGO_URI=mongodb://localhost:27017/aijudge
-# or for MongoDB Atlas:
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/aijudge
-
-# Authentication
-JWT_SECRET=your_super_secret_jwt_key_here
-
-# Server
-PORT=5000
-NODE_ENV=development
-
-# Google Gemini API (for AI verdict)
-GEMINI_API_KEY=your_google_gemini_api_key
-
-# Cloudinary (optional, for file uploads)
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_KEY=your_cloudinary_api_key
-CLOUDINARY_SECRET=your_cloudinary_secret
-
-# CORS
-FRONTEND_URL=http://localhost:5173
-```
 
 ---
 
@@ -259,7 +232,7 @@ npm start
 
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 All protected routes require JWT token in the Authorization header:
 
@@ -275,7 +248,7 @@ curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
 
 ---
 
-## 📊 Database Schema
+##  Database Schema
 
 ### **User Model**
 ```javascript
@@ -331,20 +304,13 @@ curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
 
 ---
 
-## 🚀 Deployment
-
+##  Deployment
+Live Link:https://judgebackend-75yd.onrender.com
 ### Deploy to Render
 1. Create account on [Render.com](https://render.com)
 2. Connect GitHub repository
 3. Set environment variables in Render dashboard
 4. Deploy
-
-### Deploy to Railway
-1. Create account on [Railway.app](https://railway.app)
-2. Connect GitHub repository
-3. Add environment variables
-4. Deploy
-
 ### Deploy to Heroku
 ```bash
 npm install -g heroku
@@ -357,102 +323,7 @@ git push heroku main
 
 ---
 
-## 🧪 Testing with Postman
 
-### 1️⃣ Register a User
-```
-POST http://localhost:5000/api/auth/register
-Content-Type: application/json
-
-{
-  "name": "John Lawyer",
-  "email": "john@law.com",
-  "password": "password123",
-  "role": "lawyerA",
-  "phone": "9876543210",
-  "barRegistration": "BAR123456"
-}
-```
-
-### 2️⃣ Login User
-```
-POST http://localhost:5000/api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@law.com",
-  "password": "password123"
-}
-```
-Response will include JWT token.
-
-### 3️⃣ Get User Profile
-```
-GET http://localhost:5000/api/auth/profile
-Authorization: Bearer <token>
-```
-
-### 4️⃣ Create Case
-```
-POST http://localhost:5000/api/cases
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "caseNumber": "CASE-2025-001",
-  "title": "Dispute Over Property",
-  "description": "A dispute over ownership of property",
-  "jurisdiction": "California",
-  "category": "Property"
-}
-```
-
-### 5️⃣ Get All Cases
-```
-GET http://localhost:5000/api/cases
-Authorization: Bearer <token>
-```
-
-### 6️⃣ Get Case Details
-```
-GET http://localhost:5000/api/cases/<case_id>
-Authorization: Bearer <token>
-```
-
-### 7️⃣ Submit Argument
-```
-POST http://localhost:5000/api/arguments
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "caseId": "<case_id>",
-  "content": "This is my argument",
-  "side": "A"
-}
-```
-
-### 8️⃣ Get Arguments for Case
-```
-GET http://localhost:5000/api/arguments/<case_id>
-Authorization: Bearer <token>
-```
-
-### 9️⃣ Generate Verdict
-```
-POST http://localhost:5000/api/verdict/generate
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "caseId": "<case_id>"
-}
-```
-
-### 🔟 Get Verdict
-```
-GET http://localhost:5000/api/verdict/<case_id>
-Authorization: Bearer <token>
 ```
 
 ---
@@ -481,7 +352,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 📝 Notes
+##  Notes
 
 - All passwords are hashed using bcryptjs (salt rounds: 10)
 - JWT tokens expire in 30 days
@@ -491,9 +362,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 📄 License
 
-MIT License - Feel free to use this project for learning and development.
 
 ---
 
@@ -507,25 +376,8 @@ MIT License - Feel free to use this project for learning and development.
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
----
 
-## 📞 Support
 
-For issues or questions, please open an issue on GitHub.
-
----
-
-## Testing AI Judge
-1. Create a case and obtain a JWT token (register & login).
-2. POST to `/api/judge/:caseId/verdict` with optional body { "documentSummaries": [ { "name": "doc", "summary": "text..." } ] }
-3. Response: AI stores `aiVerdict` in the case.
-4. Lawyers can then POST to `/api/judge/:caseId/argument` with {"text":"My counter argument ..."}. The API enforces a max of 5 follow-ups (see `MAX_ARGUMENTS`).
-
-## Notes
-`config/llm.js` supports both OpenAI and a generic Gemini HTTP endpoint. To use Gemini:
-
-1. Set `LLM_PROVIDER=gemini` in `.env`.
-2. Set `GEMINI_ENDPOINT` to your Gemini/Vertex REST endpoint URL.
 3. Set `GEMINI_API_KEY` to your API key.
 
 The wrapper will convert chat-style `messages` into a single prompt and POST to `GEMINI_ENDPOINT` with `{ prompt, max_output_tokens, temperature }`. Responses vary by provider; the wrapper tries common response fields (`output_text`, `output[0].content`, `text`) and returns the textual output.
