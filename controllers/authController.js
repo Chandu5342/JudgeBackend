@@ -15,8 +15,9 @@ const generateToken = (userId) => {
 // CONTROLLER: Register a new lawyer
 export const register = async (req, res) => {
   try {
+    
     // Get data from request body
-    const { name, email, password, role, phone, barRegistration } = req.body;
+    const { name, email, password, role, phone, barRegistration="" } = req.body;
     // Normalize role values for backward compatibility (accept 'lawyer')
     let normalizedRole = role;
     if (role === 'lawyer') normalizedRole = 'lawyerA';
@@ -37,7 +38,7 @@ export const register = async (req, res) => {
         message: 'Email already registered',
       });
     }
-
+console.log(name, email, password, role, phone, barRegistration)
     // CREATE: New user in database
     const user = await User.create({
       name,
@@ -47,8 +48,8 @@ export const register = async (req, res) => {
       phone,
       barRegistration,
     });
-
-    // GENERATE: JWT token for this user
+console.log("hello")
+    // GENERAconsole.log("hello")TE: JWT token for this user
     const token = generateToken(user._id);
 
     // RESPONSE: Send back success with token
@@ -66,6 +67,7 @@ export const register = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error.message)
     res.status(500).json({
       success: false,
       message: 'Registration failed',
