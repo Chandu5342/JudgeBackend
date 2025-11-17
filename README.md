@@ -311,15 +311,7 @@ Live Link:https://judgebackend-75yd.onrender.com
 2. Connect GitHub repository
 3. Set environment variables in Render dashboard
 4. Deploy
-### Deploy to Heroku
-```bash
-npm install -g heroku
-heroku login
-heroku create your-app-name
-git push heroku main
-```
 
-**Update environment variables on deployment platform** with production MongoDB URI and API keys.
 
 ---
 
@@ -328,29 +320,6 @@ git push heroku main
 
 ---
 
-## 🛠️ Troubleshooting
-
-### Issue: MongoDB Connection Error
-- Verify MongoDB is running locally
-- Check `MONGO_URI` in `.env`
-- For MongoDB Atlas, ensure IP is whitelisted
-
-### Issue: JWT Token Invalid
-- Token may have expired (30 days)
-- Re-login to get new token
-- Verify `JWT_SECRET` is same across requests
-
-### Issue: Gemini API Error
-- Check if `GEMINI_API_KEY` is valid
-- Verify API is enabled in Google Cloud Console
-- Check API quota limits
-
-### Issue: CORS Errors
-- Verify `FRONTEND_URL` in `.env`
-- Check if backend is running
-- Clear browser cache and cookies
-
----
 
 ##  Notes
 
