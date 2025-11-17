@@ -52,7 +52,7 @@ It supports **user authentication**, **case management**, **document handling**,
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 backend/
@@ -105,7 +105,7 @@ backend/
 
 ---
 
-## 📦 Installation & Running
+##  Installation & Running
 
 ### Prerequisites
 - Node.js v16+ and npm
@@ -223,7 +223,7 @@ npm start
 
 ---
 
-## 👤 Test Accounts
+##  Test Accounts
 
 | Email | Password | Role |
 |-------|----------|------|
